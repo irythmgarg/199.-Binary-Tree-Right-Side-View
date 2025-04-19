@@ -1,42 +1,58 @@
-# 199.-Binary-Tree-Right-Side-View
 # Binary Tree Right Side View
 
-This repository contains an implementation for the **Right Side View** of a binary tree. The right side view represents the set of nodes visible when the tree is viewed from the right side.
+This repository contains two different approaches to solve the **Right Side View of a Binary Tree** problem. The goal is to return the values of the nodes visible when the tree is viewed from the right side.
 
 ## Problem Statement
 
-Given the root of a binary tree, return the values of the nodes you can see ordered from top to bottom when viewed from the right side.
+Given the `root` of a binary tree, imagine yourself standing on the right side of it. Return the values of the nodes you can see ordered from top to bottom.
 
-### Example:
+## Example
 ```cpp
 Input: [1,2,3,null,5,null,4]
-
 Output: [1,3,4]
 ```
 
-## Approach
+---
 
-This solution uses a **Breadth-First Search (BFS)** traversal technique to perform a level-order traversal of the tree. At each level, it records the **last node encountered**, which represents the node visible from the right side.
+## Approaches
 
-### Key Steps:
-1. **Check for empty tree**: Return an empty list if the root is null.
-2. **Level-order traversal**:
-   - Use a queue to traverse the tree level by level.
-   - At each level, store the last node encountered.
-3. **Store results**: Push the value of the last node at each level to the result list.
-4. **Return** the accumulated list as the right side view.
+### 1. **BFS (Level Order Traversal)**
 
-## Code Summary
-- `TreeNode` structure defines each node in the binary tree.
-- `rightSideView(TreeNode* root)` is the main function implementing the logic.
-- `queue<pair<TreeNode*, int>>` is used to maintain nodes along with their depth during traversal.
+This approach uses a queue to perform a level-order traversal. For each level, the last node encountered is the rightmost node and hence part of the right side view.
 
-## Time and Space Complexity
-- **Time Complexity**: `O(N)` where `N` is the number of nodes in the tree.
-- **Space Complexity**: `O(N)` due to the queue used for BFS traversal and the result list.
+#### Code Summary
+- Traverse level by level using a queue.
+- For each level, the last node processed is added to the result.
+
+#### Time & Space Complexity
+- **Time Complexity:** `O(N)` where `N` is the number of nodes in the tree.
+- **Space Complexity:** `O(N)` for storing nodes in the queue and result vector.
+
+### 2. **DFS (Depth First Search)**
+
+This approach recursively visits the right subtree before the left subtree, ensuring the rightmost node is processed first for each level.
+
+#### Code Summary
+- Use a DFS helper function with parameters `node`, `level`, and result vector.
+- If visiting a level for the first time, add the node's value to the result.
+- Traverse right subtree first, then left.
+
+#### Time & Space Complexity
+- **Time Complexity:** `O(N)`
+- **Space Complexity:** `O(H)`, where `H` is the height of the tree (due to recursive stack).
+
+---
 
 ## Applications
-- Useful in visualizing trees or hierarchical structures.
-- Applies in GUI rendering engines or scene graphs where rightmost visibility matters.
-- Can be extended to solve variations like left side view or vertical order traversal.
+- UI layout rendering from a perspective view
+- Tree-based visibility computations in simulations or games
+- Sensor/Camera field-of-view planning in robotics
+
+## How to Run
+1. Clone the repository
+2. Compile using any C++ compiler
+3. Create a binary tree and call `rightSideView(root)`
+
+## License
+This project is open-source and free to use.
 
